@@ -1,0 +1,66 @@
+.infront {
+  position: relative;
+  text-align: center;
+  color: black;
+
+  
+}
+.heading {
+  position: absolute;
+  top: 170px;
+  left: 40px;
+  font-size: 30px;
+  color: black;
+  font: bold 50px large;
+}
+
+.para {
+  position: absolute;
+  top: 250px;
+  left: 40px;
+  font-size: 20px;
+  color: black;
+  font: bold 18px large;
+}
+
+img {
+   margin-top: 64px;
+  min-height: 100%;
+  min-width: 1024px;
+   
+  width: 100%;
+  height: 100%;
+   
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+.home-cover {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  height: 100%
+}
+
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+  padding-top: 60px;
+}
+.top-right {
+  position: absolute;
+  top: 100px;
+  right: 600px;
+  font-size: 30px;
+}
+
+.top-center {
+  position: absolute;
+  top: 100px;
+  right: 600px;
+  font-size: 10px;
+}

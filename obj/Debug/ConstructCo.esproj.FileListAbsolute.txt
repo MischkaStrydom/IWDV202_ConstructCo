@@ -1,0 +1,2 @@
+C:\Angular\ConstructCo\obj\Debug\ConstructCo.esproj.SuggestedBindingRedirects.cache
+C:\Angular\ConstructCo\obj\Debug\ConstructCo.esproj.CoreCompileInputs.cache

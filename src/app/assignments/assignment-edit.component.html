@@ -1,0 +1,141 @@
+<div class="assignment-edit">
+  <h1>{{title}}</h1>
+  <p *ngIf="this.assignmentId && !assignment"><em>Loading…</em></p>
+
+
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <p>
+      <mat-error *ngIf="form.invalid && form.hasError('isDupeAssignment')">
+        <strong>ERROR</strong>:
+        A assignment with the same <i>Assignment Date</i>, <i>Project Id</i>,
+        <i>Employee Id</i>,<i>Job Id</i>,<i>Assign Hour Charge</i>,<i>Hours</i> and <i>Charge</i> already exists.
+      </mat-error>
+    </p>
+
+
+    <!-- AssignmentId -->
+
+    <!--<mat-form-field>
+      <mat-label>AssignmentId:</mat-label>
+      <input matInput formControlName="assignmentId" required
+             placeholder="Type an assignmentId">
+      <mat-error *ngIf="this.form.controls['assignmentId'].errors?.['required']">
+        AssignmentId is required.
+      </mat-error>
+    </mat-form-field>-->
+
+    <!-- AssignDate -->
+    <mat-form-field>
+      <mat-label>Assignment Date:</mat-label>
+      <input matInput type="date" formControlName="assignDate" required>
+      <mat-error *ngIf="this.form.controls['assignDate'].errors?.['required']">
+        Assignment Date is required.
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- ProjectId -->
+    <mat-form-field *ngIf="projects">
+      <mat-label>Select a Project...</mat-label>
+      <mat-select id="projectId" formControlName="projectId">
+        <mat-option *ngFor="let project of projects"
+                    [value]="project.projectId">
+          {{project.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.form.controls['projectId'].errors?.['required']">
+        Project is required.
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- EmployeeId -->
+    <mat-form-field *ngIf="employees">
+      <mat-label>Select a Employee...</mat-label>
+      <mat-select id="employeeId" formControlName="employeeId">
+        <mat-option *ngFor="let employee of employees"
+                    [value]="employee.employeeId">
+          {{employee.firstName}} {{employee.lastName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.form.controls['employeeId'].errors?.['required']">
+        Employee is required.
+      </mat-error>
+    </mat-form-field>
+
+
+    
+    <!--<mat-form-field>
+    <mat-label>AssignJobId:</mat-label>
+    <input matInput formControlName="assignJobId" required
+           placeholder="Type assignJobId">
+    <mat-error *ngIf="this.form.controls['assignJobId'].errors?.['required']">
+      AssignjobId is required.
+    </mat-error>
+  </mat-form-field>-->
+
+     
+    <mat-form-field *ngIf="jobs">
+      <mat-label>Select a Job...</mat-label>
+      <mat-select id="assignJobId" formControlName="assignJobId">
+        <mat-option *ngFor="let job of jobs"
+                    [value]="job.jobId">
+          {{job.description}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.form.controls['assignJobId'].errors?.['required']">
+        Job is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- AssignHourCharge -->
+    <mat-form-field>
+      <mat-label>Assign Hour Charge:</mat-label>
+      <input matInput formControlName="assignHourCharge" required
+             placeholder="Insert Assign Hour Charge">
+      <mat-error *ngIf="this.form.controls['assignHourCharge'].errors?.['required']">
+        Assign Hour Charge is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Hour -->
+    <mat-form-field>
+      <mat-label>Hours:</mat-label>
+      <input matInput formControlName="hours" required
+             placeholder="Insert Hours">
+      <mat-error *ngIf="this.form.controls['hours'].errors?.['required']">
+        Hour is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Charge -->
+    <mat-form-field>
+      <mat-label>Charge:</mat-label>
+      <input matInput formControlName="charge" required
+             placeholder="Insert Charge">
+      <mat-error *ngIf="this.form.controls['charge'].errors?.['required']">
+        Charge is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <button class="color"
+              type="submit"
+              [disabled]="!form.valid">
+
+        {{ this.assignmentId ? "Save" : "Create" }}
+
+      </button>
+      <button class="colors"
+              [routerLink]="['/assignments']">
+
+        Cancel
+      </button>
+    </div>
+
+
+
+  </form>
+</div>

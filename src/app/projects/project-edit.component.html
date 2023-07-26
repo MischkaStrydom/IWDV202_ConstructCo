@@ -1,0 +1,96 @@
+<div class="project-edit">
+  <h1>{{title}}</h1>
+  <p *ngIf="this.projectId && !project"><em>Loading…</em></p>
+
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <p>
+      <mat-error *ngIf="form.invalid && form.hasError('isDupeProject')">
+        <strong>ERROR</strong>:
+        A project with the same <i>Name</i>, <i>Value</i>,
+        <i>Balance</i> and <i>Employee Id</i> already exists.
+      </mat-error>
+    </p>
+
+    <!-- projectId -->
+
+    <!--<mat-form-field>
+      <mat-label>ProjectId:</mat-label>
+      <input matInput formControlName="projectId" required
+             placeholder="Type an projectId">
+      <mat-error *ngIf="this.form.controls['projectId'].errors?.['required']">
+        ProjectId is required.
+      </mat-error>
+    </mat-form-field>-->
+
+    <!-- name -->
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input matInput formControlName="name" required
+             placeholder="Insert a name">
+      <mat-error *ngIf="this.form.controls['name'].errors?.['required']">
+        Name is required.
+      </mat-error>
+      <mat-error *ngIf="this.form.controls['name'].errors?.['isDupeField']">
+        Project name already exists: please choose another.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- value -->
+    <mat-form-field>
+      <mat-label>Value:</mat-label>
+      <input matInput formControlName="value" required
+             placeholder="Insert a value">
+      <mat-error *ngIf="this.form.controls['value'].errors?.['required']">
+        Value is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- balance -->
+
+    <mat-form-field>
+      <mat-label>Balance:</mat-label>
+      <input matInput formControlName="balance" required
+             placeholder="Insert balance">
+      <mat-error *ngIf="this.form.controls['balance'].errors?.['required']">
+        Balance is required.
+      </mat-error>
+    </mat-form-field>
+
+
+
+    <!-- EmployeeId -->
+    <mat-form-field *ngIf="employees">
+      <mat-label>Select a Employee ...</mat-label>
+      <mat-select id="employeeId" formControlName="employeeId">
+        <mat-option *ngFor="let employee of employees"
+                    [value]="employee.employeeId">
+          {{ employee.firstName }}  {{employee.lastName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="this.form.controls['employeeId'].errors?.['required']">
+        Employee is required.
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button class="color"
+              type="submit"
+              [disabled]="!form.valid">
+        {{ this.projectId ? "Save" : "Create"
+          }}
+
+      </button>
+          <button class="colors"
+                  [routerLink]="['/projects']">
+            Cancel
+          </button>
+    </div>
+
+  </form>
+</div>
+
+
+
+
+

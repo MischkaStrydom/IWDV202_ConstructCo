@@ -1,0 +1,80 @@
+<h1  class="nav">Employees</h1>
+<p>Here's a list of employees.</p>
+
+<p *ngIf="!employees"><em>Loading...</em></p>
+
+  <button mat-flat-button color="primary"
+          class="btn-add" *ngIf="employees" [routerLink]="['/employee']">
+    Add a new employee
+  </button>
+
+
+  <mat-form-field [hidden]="!employees">
+    <input matInput #filter (keyup)="onFilterTextChanged(filter.value)"
+           placeholder="Filter by firstname (or part of it)...">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="employees"
+         class="mat-elevation-z8"
+         [hidden]="!employees"
+         matSort (matSortChange)="loadData()"
+         [matSortActive]="defaultSortColumn"
+         [matSortDirection]="defaultSortOrder">
+
+
+    <!-- EmployeeId Column -->
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>EmployeeId</th>
+      <td mat-cell *matCellDef="let employee">{{employee.employeeId}}</td>
+    </ng-container>
+
+    <!-- lastName Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>LastName</th>
+      <td mat-cell *matCellDef="let employee">{{employee.lastName}}</td>
+    </ng-container>
+
+    <!-- firstName Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FirstName</th>
+      <td mat-cell *matCellDef="let employee">
+        <a [routerLink]="['/employee', employee.employeeId]">{{employee.firstName}}</a>
+      </td>
+    </ng-container>
+
+    <!-- initials Column -->
+    <ng-container matColumnDef="initials">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Initials</th>
+      <td mat-cell *matCellDef="let employee">{{employee.initials}}</td>
+    </ng-container>
+
+    <!-- hiredDate Column -->
+    <ng-container matColumnDef="hiredDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>HireDate</th>
+      <td mat-cell *matCellDef="let employee">{{employee.hiredDate}}</td>
+    </ng-container>
+
+    <!-- jobId Column -->
+    <ng-container matColumnDef="jobId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>JobId</th>
+      <td mat-cell *matCellDef="let employee">{{employee.jobId}}</td>
+    </ng-container>
+
+    <!-- yearsOfService Column -->
+    <ng-container matColumnDef="yearsOfService">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>YearsOfService</th>
+      <td mat-cell *matCellDef="let employee">{{employee.yearsOfService}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <!-- Pagination directive -->
+  <mat-paginator [hidden]="!employees"
+                 (page)="getData($event)"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 50]"
+                 showFirstLastButtons></mat-paginator>
+

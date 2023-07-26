@@ -1,0 +1,44 @@
+.nav{
+    padding-top: 65px;
+}
+
+table.mat-table {
+  width: 100%;
+
+
+  .mat-row:hover {
+    background-color: lightblue;
+  }
+}
+
+/*
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}*/
+
+
+.mat-form-field {
+    
+  font-size: 14px;
+  width: 100%;
+  
+}
+
+.text-center{
+    text-align:center;
+}
+
+.btn-add {
+  top: 70px;
+  float: right;
+  background-color: rgb(4, 159, 209);
+  color: black;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font: bold 16px large;
+  cursor:pointer;
+}
+
+

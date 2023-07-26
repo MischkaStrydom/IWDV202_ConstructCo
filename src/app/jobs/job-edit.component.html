@@ -1,0 +1,83 @@
+<div class="job-edit">
+  <h1>{{title}}</h1>
+  <p class="para" *ngIf="this.jobId && !job"><em>Loading…</em></p>
+
+
+
+  <form class="modal-content" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+
+
+    <p>
+      <mat-error *ngIf="form.invalid && form.hasError('isDupeJob')">
+        <strong>ERROR</strong>:
+        A job with the same <i>Description</i>, <i>Hour Charge</i> and
+        <i>Last Updated</i> already exists.
+      </mat-error>
+    </p>
+
+    <p> </p>
+      <!-- jobId -->
+      <!--<mat-form-field>
+      <mat-label>Job Id:</mat-label>
+      <input matInput formControlName="jobId" required
+             placeholder="Type an jobId">
+      <mat-error *ngIf="this.form.controls['jobId'].errors?.['required']">
+        JobId is required.
+      </mat-error>
+    </mat-form-field>-->
+      <!-- description -->
+      <mat-form-field>
+        <mat-label>Description:</mat-label>
+        <input matInput formControlName="description" required
+               placeholder="Insert a description">
+        <mat-error *ngIf="this.form.controls['description'].errors?.['required']">
+          Description is required.
+        </mat-error>
+        <mat-error *ngIf="this.form.controls['description'].errors?.['isDupeField']">
+          Job description already exists: please choose another.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- hourCharge -->
+      <mat-form-field>
+        <mat-label>Hour Charge:</mat-label>
+        <input matInput formControlName="hourCharge" required
+               placeholder="Insert a hour charge">
+        <mat-error *ngIf="this.form.controls['hourCharge'].errors?.['required']">
+          Hour Charge is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- lastUpdated -->
+
+      <mat-form-field>
+        <mat-label>Last Updated:</mat-label>
+        <input matInput type="date" formControlName="lastUpdated" required>
+        <mat-error *ngIf="this.form.controls['lastUpdated'].errors?.['required']">
+          Last Updated is required.
+        </mat-error>
+      </mat-form-field>
+
+
+      <div>
+        <button class="color"
+                type="submit"
+                [disabled]="!form.valid">
+          {{ this.jobId ? "Save" : "Create" }}
+
+        </button>
+
+        <button class="colors"
+                [routerLink]="['/jobs']">
+          Cancel
+        </button>
+      </div>
+
+
+  </form>
+
+
+
+</div>

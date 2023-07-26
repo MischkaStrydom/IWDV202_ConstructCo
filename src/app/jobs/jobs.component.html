@@ -1,0 +1,76 @@
+<h1 class="nav" >Jobs</h1>
+<p>Here's a list of jobs.</p>
+
+<p *ngIf="!jobs"><em>Loading...</em></p>
+
+  <button mat-flat-button color="primary"
+          class="btn-add" *ngIf="jobs" [routerLink]="['/job']">
+    Add a new job
+  </button>
+
+  <mat-form-field [hidden]="!jobs">
+    <input matInput #filter (keyup)="onFilterTextChanged(filter.value)"
+           placeholder="Filter by description (or part of it)...">
+  </mat-form-field>
+
+
+
+  <table mat-table [dataSource]="jobs"
+         class="mat-elevation-z8"
+         [hidden]="!jobs"
+         matSort (matSortChange)="loadData()"
+         [matSortActive]="defaultSortColumn"
+         [matSortDirection]="defaultSortOrder">
+
+    <!-- jobId Column -->
+    <ng-container matColumnDef="jobId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>JobId</th>
+      <td mat-cell *matCellDef="let job">{{job.jobId}}</td>
+    </ng-container>
+
+    <!-- description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let job">
+        <a  [routerLink]="['/job', job.jobId]">{{job.description}}</a>
+
+      </td>
+    </ng-container>
+
+    <!-- hourCharge Column -->
+    <ng-container matColumnDef="hourCharge">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>HourCharge</th>
+      <td mat-cell *matCellDef="let job">{{job.hourCharge}}</td>
+    </ng-container>
+
+    <!-- lastUpdated Column -->
+    <ng-container matColumnDef="lastUpdated">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>LastUpdated</th>
+      <td mat-cell *matCellDef="let job">{{job.lastUpdated}}</td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+
+  <!-- Pagination directive -->
+  <mat-paginator [hidden]="!jobs"
+                 (page)="getData($event)"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[10, 20, 50]"
+                 showFirstLastButtons>
+
+  </mat-paginator>
+
+
+
+
+
+
+
+
+
+
